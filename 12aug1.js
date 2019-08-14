@@ -136,21 +136,6 @@ else{
     console.log("This number is not divisible by 3 or 5") // if it isn't divisible by 3 or 5, this line will show
 }
 
-/*longtext = "jrfndklhgfndjkjlkgperfijfhdknsadcvjhiiohjfkledsopiuhgtyujwsdxcvhgfdjhiopiwquhejkdsoiufghedjwshi"
-ltc = "-"
-for (i = longtext.length - 1; i > 0; i--){
-    ltc = longtext.charAt(i)
-    if (ltc == "a" ||
-    ltc == "e" ||
-    ltc == "i" ||
-    ltc == "o" ||
-    ltc == "u"){
-        console.log(`the last vowel is an ${ltc}`)
-        escape
-    }
-    
-}*/
-
 let favsongs = [ // an array of my favourite songs
     "19-2000 - Gorrilaz", // I don't really listen to music
     "Danny don't you know - NSP",
