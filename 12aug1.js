@@ -216,27 +216,27 @@ function checkLine(ch1, ch2, ch3){ // checkline is fed three different strings, 
     else{return null}} // there's no point in returning anything if it's anything else, but just to be safe I'm returning a null
 winner = "no one" // the 'winner' variable is what we're going to be using to show who the winner is, if you couldn't guess. It defaults to no one, because no one has won yet
 function checkWinner(chxyd, chno){ // the winner checker uses a somewhat odd format. The first variable is either x, y or diagonal and the second is the line of that type that is being checked. For example, x 1 is the middle horizontal line
-    if(chxyd == "x"){ 
-        return checkLine(sg[chno][0], sg[chno][1], sg[chno][2])
+    if(chxyd == "x"){ // the first potential kind of line is horizontal, so the next line checks for a horizontal line
+        return checkLine(sg[chno][0], sg[chno][1], sg[chno][2]) // checkline is occurring for each y combination with this loop's current row
     }
-    else if(chxyd == "y"){
+    else if(chxyd == "y"){ // similarly, this line checks for all of the columns
         return checkLine(sg[0][chno], sg[1][chno], sg[2][chno])
     }
-    else if(chno == 0){
-        return checkLine(sg[0][0], sg[1][1], sg[2][2])
+    else if(chno == 0){ // if the first variable of the function is neither x nor y, then it has to be checking diagonals. Doesn't really matter what it is, so I'm checking the second variable to see which diagonal this is
+        return checkLine(sg[0][0], sg[1][1], sg[2][2]) // the 'zeroth' line is the first cell, the middle cell and the final cell
     }
     else{
-        return checkLine(sg[0][2], sg[1][1], sg[2][0])
+        return checkLine(sg[0][2], sg[1][1], sg[2][0]) // the other line is a backslash. If any of these find a line of O's or X's, it'll return what kind of line it is
     }
 }
-function updateWinner(xoro){
+function updateWinner(xoro){ // updateWinner will update the winner variable, something which is more complicated because if X gets a line and O gets a line, neither should win
     if (xoro == "X" || xoro == "O"){ // if the line is filled with noughts or crosses,
         if (winner == "no one"){winner = xoro} // and there isn't a winner, then that player becomes the winner
         else if (winner != " " && winner != xoro){winner = "no one"} // if the winner is already considered the other player, then that means it must be a tie and no one wins
     }
 }
-function checkWholeGrid(){
-    updateWinner(checkWinner("x", 0))
+function checkWholeGrid(){ // to check the whole grid, I made a function, just in case I'd want to run it again for whatever reason
+    updateWinner(checkWinner("x", 0)) // all the function does is use the checkWinner function for each possible kind of line
     updateWinner(checkWinner("x", 1))
     updateWinner(checkWinner("x", 2))
     updateWinner(checkWinner("y", 0))
@@ -245,46 +245,52 @@ function checkWholeGrid(){
     updateWinner(checkWinner("d", 0))
     updateWinner(checkWinner("d", 1))
 }
-checkWholeGrid()
+checkWholeGrid() // now that it's defined and I want to run it, I run it
+
 console.log()
-console.log(`${winner} is the winner`)
+console.log(`${winner} is the winner`) // this is the lazy way of doing this; it not only shows 'X is the winner' or 'O is the winner', but also simply says 'no one is the winner' instead of something more human-readable like 'it's a draw'. I put more time and effort into writing this...
 console.log()
 
-let isThinking = false
-const thinkingMachine = () => {
-    if (isThinking){console.log("Thinking...")}
-    isThinking = !isThinking
+let isThinking = false // I'm making a thinking machine, which by default is deactivated. This variable is a simple boolean which indicates whether the thinking machine is thinking or not
+const thinkingMachine = () => { // thinkingMachine is a constant object and, rather than being a sophisticated AI, just says that it's thinking if the relevant boolean is true
+    if (isThinking){console.log("Thinking...")} // this is almost human readable: If it's thinking (boolean is true), log to the console that it's thinking
+    isThinking = !isThinking // whether it's thinking or not, trying to access the thinking machine will switch it from on to off. When it's not 'thinking', it doesn't do anything
 }
 
-thinkingMachine()
-thinkingMachine()
+thinkingMachine() // the first run of the thinking machine shouldn't log anything to the console, but will activate it
+thinkingMachine() // now that it's active, it'll start thinking, before being deactivated  again
 
-const colouriser = (colour, object) => {
-    console.log(`You've painted the ${object} ${colour}`)
+const colouriser = (colour, object) => { // another constant object I've created is the colouriser, which colourises an object
+    console.log(`You've painted the ${object} ${colour}`) // depending on the colour and object passed into it as parameters, it'll paint the object that colour (or at least say that you've done so)
 }
-colouriser("red", "town")
+colouriser("red", "town") // now that it's created, lets paint the town red
 
-let orderCount = 1
+let orderCount = 1 // the pizzabot(tm) takes a number of orders, and those orders are numbered starting at 1
 
-function takeOrder(topping, base, size){
-    console.log(`Order ${orderCount} is a ${size}-inch ${base} base pizza with ${topping} on top`)
-    orderCount++
-}
-
-takeOrder("chicken", "BBQ", 12)
-takeOrder("pineapple and chicken", "cheese and tomato", 10)
-
-account = {
-    Number: 1234321,
-    Passcode: 12341234,
-    Balance: 1000
+function takeOrder(topping, base, size){ // taking an order requires the topping, base and size as parameters
+    console.log(`Order ${orderCount} is a ${size}-inch ${base} base pizza with ${topping} on top`) // it'll tell you that the order number x is an x-inch, x-base pizza with x-topping(s)
+    orderCount++ // to make the order count actually useful, it'll increment whenever the function is run
 }
 
-function checkAccount(pin, amm){
-    if (pin == account.Passcode && amm < account.Balance)
-    {console.log(`£${amm} withdrawn from account ${account.Number}`)}
-    else (console.log("Error!"))
+takeOrder("chicken", "BBQ", 12) // to test it, here's the kind of pizza that I'd eat
+takeOrder("pineapple and chicken", "cheese and tomato", 10) // and here's the kind of pizza that my housemate'd eat
+
+class Account{ // making an account class will mean that I can create an account
+    constructor(no, pass, bal){ // the constructor contains the variables that every account will need to have
+        this.no = no, // to make these variables accessable, they're tied to the dot notation
+        this.pass = pass, // the variables are no for account number, pass for password and bal for balance
+        this.bal = bal 
+    }
 }
-checkAccount(1444141, 999)
-checkAccount(12341234, 1111)
-checkAccount(12341234, 666)
+
+myAccount = new Account(1234321, 12341234, 1000) // my example account has £1000, or it would have if I'd specified the currency
+
+function checkAccount(pin, amm){ // the checkAccount function requires a pin and the ammount to withdraw, it's already assuming that the account is my account
+    if (pin == myAccount.pass && amm <= myAccount.bal) // if the pin supplied to the function matches my account's password and the ammount supplied to the function is less than my total balance, then I can withdraw it
+    {console.log(`£${amm} withdrawn from account ${myAccount.no}`)} // this shows in the console that it has successfully been withdrawn from the theoretical bank
+    else (console.log("Error!")) // however, if it's too much money or the password isn't right, the bank'll just throw an error at you
+}
+
+checkAccount(1444141, 999) // now that there's an account, I'll try withdrawing using the wrong pass
+checkAccount(12341234, 1111) // now I'm trying to withdraw too much
+checkAccount(12341234, 666) // now I'm withdrawing a sane (but sinister) ammount and using the right code
