@@ -287,7 +287,8 @@ myAccount = new Account(1234321, 12341234, 1000) // my example account has £100
 
 function checkAccount(pin, amm){ // the checkAccount function requires a pin and the ammount to withdraw, it's already assuming that the account is my account
     if (pin == myAccount.pass && amm <= myAccount.bal) // if the pin supplied to the function matches my account's password and the ammount supplied to the function is less than my total balance, then I can withdraw it
-    {console.log(`£${amm} withdrawn from account ${myAccount.no}`)} // this shows in the console that it has successfully been withdrawn from the theoretical bank
+    {console.log(`£${amm} withdrawn from account ${myAccount.no}`) // this shows in the console that it has successfully been withdrawn from the theoretical bank
+    myAccount.bal -= amm}
     else (console.log("Error!")) // however, if it's too much money or the password isn't right, the bank'll just throw an error at you
 }
 
@@ -338,3 +339,42 @@ function coffeemachine (drink){
 
 coffeemachine("espresso")
 coffeemachine("chocolate")
+
+class car{
+    constructor(name){
+        this.name = name
+    }
+}
+
+class companycar extends car{
+    constructor(name, discount, staffno){
+        super(name)
+        this.name = name
+        this.discount = discount
+        this.staffno = staffno
+    }
+}
+
+mycar = new companycar("A car name", 30, 12341234)
+console.log(`My car, ${mycar.name}, gets a ${mycar.discount}% discount and has the staff number ${mycar.staffno}`)
+
+class animal{
+    constructor(name, species){
+        this.species = species
+        this.name = name
+    }
+}
+
+class bunny extends animal{
+    constructor(name, species, breed, lovescarrots){
+        super(name, species)
+        this.breed = breed
+        this._lovescarrots = lovescarrots
+    }
+    get lovescarrots(){return this._lovescarrots}
+}
+
+hoppy = new bunny("hopps", "bunny", "hopper", true)
+
+console.log(`The bunny ${hoppy.name} is a ${hoppy.breed} ${hoppy.species}`)
+if(hoppy.lovescarrots){console.log("they love carrots")}
