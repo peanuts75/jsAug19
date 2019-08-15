@@ -294,3 +294,8 @@ function checkAccount(pin, amm){ // the checkAccount function requires a pin and
 checkAccount(1444141, 999) // now that there's an account, I'll try withdrawing using the wrong pass
 checkAccount(12341234, 1111) // now I'm trying to withdraw too much
 checkAccount(12341234, 666) // now I'm withdrawing a sane (but sinister) ammount and using the right code
+
+function subsandwich(f1, f2, f3, f4, f5){
+    console.log(`Your fillings are ${f1}, ${f2}, ${f3}, ${f4} and ${f5}`)
+}
+subsandwich("ham", "cheese", "salami", "pepperoni", "meatballs")
