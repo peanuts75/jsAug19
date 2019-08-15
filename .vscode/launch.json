@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/OX.js"
+            "program": "${workspaceFolder}/12aug1.js"
         }
     ]
 }

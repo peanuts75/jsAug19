@@ -320,3 +320,21 @@ while( num != 50 ){
     num = Math.floor(Math.random()*100)
     console.log(num)
 }
+
+
+
+function coffeemachine (drink){
+    if (drink == "chocolate"){
+        goodtaste = true
+        moneyleft = true
+    }
+    if (drink == "espresso"){
+        goodtaste = false
+        moneyleft = false
+    }
+    if (goodtaste && moneyleft){console.log("You're in for a good time")}
+    else{console.log("You're gonna have a bad time")}
+}
+
+coffeemachine("espresso")
+coffeemachine("chocolate")
