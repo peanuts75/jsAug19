@@ -299,3 +299,24 @@ function subsandwich(f1, f2, f3, f4, f5){
     console.log(`Your fillings are ${f1}, ${f2}, ${f3}, ${f4} and ${f5}`)
 }
 subsandwich("ham", "cheese", "salami", "pepperoni", "meatballs")
+
+favFilms = ["no idea", "not a clue", "I dunno"]
+favFilms.push("something")
+favFilms.unshift("some film")
+for (i = 0; i < favFilms.length; i++){
+    console.log(favFilms[i])
+}
+
+function filmCheck(){
+    film = favFilms[2]
+    if (film == "Ghostbusters")
+        {console.log("yay")}
+    else{console.log("boo")}
+}
+filmCheck()
+
+num = 0
+while( num != 50 ){
+    num = Math.floor(Math.random()*100)
+    console.log(num)
+}
